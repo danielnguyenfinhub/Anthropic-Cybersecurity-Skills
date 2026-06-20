@@ -1,0 +1,19 @@
+[Unit]
+Description=claude-code-remote scheduler worker (fires send_later jobs)
+After=network.target
+
+[Service]
+Type=simple
+# Adjust paths/user to your install location.
+WorkingDirectory=/opt/claude-code-remote
+ExecStart=/usr/bin/node /opt/claude-code-remote/dist/worker.js
+Restart=on-failure
+RestartSec=5
+Environment=CCR_DB_PATH=/var/lib/claude-code-remote/jobs.db
+Environment=CCR_POLL_INTERVAL_MS=30000
+Environment=CCR_MAX_ATTEMPTS=3
+# Must be the same `claude` binary/credentials that owns the sessions.
+Environment=CCR_WAKE_CMD=claude
+
+[Install]
+WantedBy=multi-user.target

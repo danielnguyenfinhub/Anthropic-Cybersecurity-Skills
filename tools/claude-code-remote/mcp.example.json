@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "claude-code-remote": {
+      "command": "node",
+      "args": ["/opt/claude-code-remote/dist/server.js"],
+      "env": {
+        "CCR_DB_PATH": "/var/lib/claude-code-remote/jobs.db"
+      }
+    }
+  }
+}
